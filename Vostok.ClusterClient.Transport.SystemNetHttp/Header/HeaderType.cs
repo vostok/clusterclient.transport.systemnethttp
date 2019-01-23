@@ -10,7 +10,6 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Header
         Response = 4,
         Content = 8,
         Custom = 16,
-        All = Custom | Content | Response | Request | General,
-        None = 0
+        All = Custom | Content | Response | Request | General
     }
 }
