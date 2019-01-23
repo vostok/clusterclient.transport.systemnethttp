@@ -1,0 +1,24 @@
+src:
+  build:
+    target: None
+    configuration: None
+
+  deps:
+    - vostok.devtools
+    - vostok.clusterclient.core
+    - vostok.logging.abstractions
+
+notests *default:
+  build:
+    target: Vostok.ClusterClient.Transport.SystemNetHttp.sln
+    configuration: NoTests
+    tool:
+      name: dotnet
+
+  install:
+    - Vostok.ClusterClient.Transport.SystemNetHttp/bin/Release/netstandard2.0/Vostok.ClusterClient.Transport.SystemNetHttp.dll
+
+full-build > notests:
+  build:
+    target: Vostok.ClusterClient.Transport.SystemNetHttp.sln
+    configuration: Release
