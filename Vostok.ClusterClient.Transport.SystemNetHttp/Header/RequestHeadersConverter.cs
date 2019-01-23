@@ -22,6 +22,8 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Header
                     AssignHeadersThroughProperties(request.Headers, message);
                 }
             }
+
+            TrySetHostExplicitly(request.Headers, message.Headers);
         }
 
         private static void AssignHeadersDirectly(Headers source, HttpHeaders target)
@@ -78,6 +80,13 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Header
                 default:
                     return false;
             }
+        }
+
+        private static void TrySetHostExplicitly(Headers source, HttpRequestHeaders target)
+        {
+            var host = source?[HeaderNames.Host];
+            if (host != null)
+                target.Host = host;
         }
     }
 }

@@ -1,0 +1,15 @@
+<Project>
+
+  <ItemGroup>
+    <Compile Remove="$(MSBuildThisFileDirectory)\..\vostok.commons.environment\Vostok.Commons.Environment\RuntimeDetector.cs" Link="Commons\RuntimeDetector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)\..\vostok.commons.environment\Vostok.Commons.Environment\RuntimeDetector.cs" Link="Commons\RuntimeDetector.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\HeaderType.cs" Link="Commons\HeaderType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\RequestHeadersConverter.cs" Link="Commons\RequestHeadersConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\RequestHeadersUnlocker.cs" Link="Commons\RequestHeadersUnlocker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\ResponseHeadersConverter.cs" Link="Commons\ResponseHeadersConverter.cs" />
+  </ItemGroup>
+
+</Project>
