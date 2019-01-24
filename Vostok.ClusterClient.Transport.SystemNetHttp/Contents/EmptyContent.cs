@@ -7,6 +7,8 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
 {
     internal class EmptyContent : HttpContent
     {
+        public static readonly EmptyContent Instance = new EmptyContent();
+
         public EmptyContent()
         {
             Headers.ContentLength = 0;
