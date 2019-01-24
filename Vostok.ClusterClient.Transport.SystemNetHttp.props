@@ -6,10 +6,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\HeaderType.cs" Link="Commons\HeaderType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\RequestHeadersConverter.cs" Link="Commons\RequestHeadersConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\RequestHeadersUnlocker.cs" Link="Commons\RequestHeadersUnlocker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\ResponseHeadersConverter.cs" Link="Commons\ResponseHeadersConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Contents\*.cs" LinkBase="Commons\Contents" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Exceptions\*.cs" LinkBase="Commons\Exceptions" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\*.cs" LinkBase="Commons\Header" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Helpers\*.cs" LinkBase="Commons\Helpers" />
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Messages\*.cs" LinkBase="Commons\Messages" />
   </ItemGroup>
 
 </Project>
