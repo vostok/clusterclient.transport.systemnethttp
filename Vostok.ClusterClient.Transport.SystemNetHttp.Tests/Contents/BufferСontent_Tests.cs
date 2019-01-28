@@ -44,8 +44,26 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Tests.Contents
         }
 
         [Test]
-        public void Should_be_read_as_correct_portion_of_given_buffer()
+        public void Should_be_read_as_correct_portion_of_small_buffer()
         {
+            content.ReadAsByteArrayAsync().Result.Should().Equal(usefulData);
+        }
+
+        [Test]
+        public void Should_be_read_as_correct_portion_of_large_buffer()
+        {
+            usefulData = new byte[100 * 1000];
+
+            new Random(Guid.NewGuid().GetHashCode()).NextBytes(usefulData);
+
+            totalBuffer = Guid.NewGuid()
+                .ToByteArray()
+                .Concat(usefulData)
+                .Concat(Guid.NewGuid().ToByteArray())
+                .ToArray();
+
+            content = new BufferContent(new Content(totalBuffer, 16, usefulData.Length), cancellation.Token);
+
             content.ReadAsByteArrayAsync().Result.Should().Equal(usefulData);
         }
 
