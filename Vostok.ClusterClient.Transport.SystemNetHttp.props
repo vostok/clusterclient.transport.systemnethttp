@@ -6,6 +6,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\BodyReading\*.cs" LinkBase="Commons\BodyReading" />
     <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Contents\*.cs" LinkBase="Commons\Contents" />
     <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Exceptions\*.cs" LinkBase="Commons\Exceptions" />
     <Compile Include="$(MSBuildThisFileDirectory)\Vostok.ClusterClient.Transport.SystemNetHttp\Header\*.cs" LinkBase="Commons\Header" />
