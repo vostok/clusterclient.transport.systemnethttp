@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Vostok.Clusterclient.Core.Model;
 
-namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
+namespace Vostok.Clusterclient.Transport.SystemNetHttp.BodyReading
 {
     internal readonly struct BodyReadResult
     {

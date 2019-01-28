@@ -7,19 +7,19 @@ using Vostok.Clusterclient.Core.Model;
 using Vostok.Clusterclient.Transport.SystemNetHttp.Helpers;
 using Vostok.Logging.Abstractions;
 
-namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
+namespace Vostok.Clusterclient.Transport.SystemNetHttp.BodyReading
 {
     internal class BodyReader : IBodyReader
     {
         private readonly Func<long, byte[]> bufferFactory;
         private readonly Func<long?, bool> useStreaming;
-        private readonly long? maxBodySize;
+        private readonly Func<long?> maxBodySize;
         private readonly ILog log;
 
         public BodyReader(
             Func<long, byte[]> bufferFactory,
             Func<long?, bool> useStreaming, 
-            long? maxBodySize, 
+            Func<long?> maxBodySize, 
             ILog log)
         {
             this.bufferFactory = bufferFactory;
@@ -38,9 +38,11 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
                     if (contentLength.Value == 0L)
                         return new BodyReadResult(Content.Empty);
 
-                    if (contentLength.Value > maxBodySize || contentLength.Value > int.MaxValue)
+                    var maximumSize = maxBodySize();
+
+                    if (contentLength.Value > maximumSize || contentLength.Value > int.MaxValue)
                     {
-                        LogBodyTooLarge(Math.Min(int.MaxValue, maxBodySize ?? long.MaxValue), contentLength.Value);
+                        LogBodyTooLarge(Math.Min(int.MaxValue, maximumSize ?? long.MaxValue), contentLength.Value);
                         return new BodyReadResult(ResponseCode.InsufficientStorage);
                     }
                 }
@@ -74,6 +76,7 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
             using (BufferPool.Acquire(out var buffer))
             {
                 var memoryStream = new MemoryStream();
+                var maximumSize = maxBodySize();
 
                 while (true)
                 {
@@ -81,9 +84,9 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
                     if (bytesRead == 0)
                         break;
 
-                    if (maxBodySize.HasValue && memoryStream.Length + bytesRead > maxBodySize)
+                    if (maximumSize.HasValue && memoryStream.Length + bytesRead > maximumSize)
                     {
-                        LogBodyTooLarge(maxBodySize.Value, null);
+                        LogBodyTooLarge(maximumSize.Value, null);
                         return new BodyReadResult(ResponseCode.InsufficientStorage);
                     }
 

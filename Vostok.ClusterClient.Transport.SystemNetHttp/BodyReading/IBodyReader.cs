@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Vostok.Clusterclient.Transport.SystemNetHttp.ResponseReading
+namespace Vostok.Clusterclient.Transport.SystemNetHttp.BodyReading
 {
     internal interface IBodyReader
     {
