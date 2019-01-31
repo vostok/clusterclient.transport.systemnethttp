@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Vostok.Clusterclient.Core.Model;
 using Vostok.Clusterclient.Transport.SystemNetHttp.Exceptions;
 
 namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
@@ -42,6 +43,10 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
             {
                 throw;
             }
+            catch (StreamAlreadyUsedException)
+            {
+                throw;
+            }
             catch (Exception error)
             {
                 throw new UserStreamException($"Failed to read from user-provided stream of type '{stream.GetType().Name}'.", error);
@@ -55,6 +60,10 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
                 return await stream.ReadAsync(buffer, offset, count, cancellationToken).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
+            {
+                throw;
+            }
+            catch (StreamAlreadyUsedException)
             {
                 throw;
             }

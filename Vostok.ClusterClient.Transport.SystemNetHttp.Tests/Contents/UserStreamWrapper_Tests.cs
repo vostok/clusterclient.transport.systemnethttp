@@ -6,6 +6,7 @@ using FluentAssertions;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
+using Vostok.Clusterclient.Core.Model;
 using Vostok.Clusterclient.Transport.SystemNetHttp.Contents;
 using Vostok.Clusterclient.Transport.SystemNetHttp.Exceptions;
 
@@ -44,6 +45,16 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Tests.Contents
             Action action = () => wrapper.ReadAsync(buffer, 0, 1).GetAwaiter().GetResult();
 
             action.Should().Throw<TaskCanceledException>();
+        }
+
+        [Test]
+        public void ReadAsync_should_pass_reuse_exceptions_as_is()
+        {
+            stream.ReadAsync(default, default, default, default).ThrowsForAnyArgs(new StreamAlreadyUsedException(""));
+
+            Action action = () => wrapper.ReadAsync(buffer, 0, 1).GetAwaiter().GetResult();
+
+            action.Should().Throw<StreamAlreadyUsedException>();
         }
 
         [Test]
