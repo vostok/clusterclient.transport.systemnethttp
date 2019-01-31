@@ -57,7 +57,7 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Messages
             if (request.StreamContent != null)
                 return new StreamContent(request.StreamContent, cancellationToken);
 
-            return EmptyContent.Instance;
+            return new EmptyContent();
         }
     }
 }
