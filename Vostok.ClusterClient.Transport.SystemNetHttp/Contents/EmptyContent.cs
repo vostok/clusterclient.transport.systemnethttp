@@ -1,28 +1,19 @@
 ﻿using System.IO;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
 {
-    internal class EmptyContent : HttpContent
+    internal class EmptyContent : GenericContent
     {
         public EmptyContent()
         {
             Headers.ContentLength = 0;
         }
 
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
-            => Task.CompletedTask;
+        public override long? Length => 0;
 
-        protected override Task<Stream> CreateContentReadStreamAsync()
-            => Task.FromResult(Stream.Null);
+        public override Stream AsStream => Stream.Null;
 
-        protected override bool TryComputeLength(out long length)
-        {
-            length = 0;
-
-            return true;
-        }
+        public override Task Copy(Stream target) => Task.CompletedTask;
     }
 }
