@@ -11,13 +11,13 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.BodyReading
 {
     internal class BodyReader : IBodyReader
     {
-        private readonly Func<long, byte[]> bufferFactory;
+        private readonly Func<int, byte[]> bufferFactory;
         private readonly Func<long?, bool> useStreaming;
         private readonly Func<long?> maxBodySize;
         private readonly ILog log;
 
         public BodyReader(
-            Func<long, byte[]> bufferFactory,
+            Func<int, byte[]> bufferFactory,
             Func<long?, bool> useStreaming, 
             Func<long?> maxBodySize, 
             ILog log)
