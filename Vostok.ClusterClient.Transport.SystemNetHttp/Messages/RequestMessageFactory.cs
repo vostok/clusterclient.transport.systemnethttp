@@ -54,6 +54,9 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Messages
             if (request.Content != null && request.Content.Length > 0)
                 return new BufferContent(request.Content, cancellationToken);
 
+            if (request.CompositeContent != null && request.CompositeContent.Length > 0)
+                return new CompositeBufferContent(request.CompositeContent, cancellationToken);
+
             if (request.StreamContent != null)
                 return new StreamContent(request.StreamContent, cancellationToken);
 

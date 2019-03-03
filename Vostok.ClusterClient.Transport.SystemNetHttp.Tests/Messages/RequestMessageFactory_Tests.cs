@@ -94,6 +94,16 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Tests.Messages
         }
 
         [Test]
+        public void Should_create_a_message_with_composite_content_if_request_has_a_composite_buffer_body()
+        {
+            request = request.WithContent(new [] { new byte[1], new byte[2] });
+
+            Convert();
+
+            message.Content.Should().BeOfType<CompositeBufferContent>();
+        }
+
+        [Test]
         public void Should_fill_message_with_request_headers()
         {
             request = request

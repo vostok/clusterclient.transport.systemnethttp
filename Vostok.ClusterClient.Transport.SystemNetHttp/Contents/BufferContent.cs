@@ -12,12 +12,13 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
         private readonly Content content;
         private readonly CancellationToken cancellationToken;
 
-        public BufferContent(Content content, CancellationToken cancellationToken)
+        public BufferContent(Content content, CancellationToken cancellationToken, bool setContentLengthHeader = true)
         {
             this.content = content;
             this.cancellationToken = cancellationToken;
 
-            Headers.ContentLength = content.Length;
+            if (setContentLengthHeader)
+                Headers.ContentLength = content.Length;
         }
 
         public override long? Length => content.Length;
