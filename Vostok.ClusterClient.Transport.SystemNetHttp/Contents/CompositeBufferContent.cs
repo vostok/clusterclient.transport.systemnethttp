@@ -28,7 +28,7 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Contents
         public override async Task Copy(Stream target)
         {
             foreach (var part in content.Parts)
-                await new BufferContent(part, cancellationToken).Copy(target).ConfigureAwait(false);
+                await new BufferContent(part, cancellationToken, false).Copy(target).ConfigureAwait(false);
         }
     }
 }
