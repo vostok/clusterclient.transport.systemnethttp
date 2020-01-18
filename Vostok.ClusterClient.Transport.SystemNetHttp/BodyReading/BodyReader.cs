@@ -140,9 +140,9 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.BodyReading
         }
 
         private void LogBodyReadFailure(Exception error)
-            => log.Error(error, "Failed to read response body.");
+            => log.Warn(error, "Failed to read response body.");
 
         private void LogBodyTooLarge(long limit, long? actual)
-            => log.Error("Response body is too large. Limit = {Limit}. Actual size = {Size}.", limit, actual?.ToString() ?? "?");
+            => log.Warn("Response body is too large. Limit = {Limit}. Actual size = {Size}.", limit, actual?.ToString() ?? "?");
     }
 }
