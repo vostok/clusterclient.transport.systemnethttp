@@ -8,6 +8,7 @@ src *default:
     - vostok.clusterclient.core
     - vostok.logging.abstractions
     - vostok.commons.environment/src
+    - vostok.commons.time/src
 
 full-build > src:
   build:

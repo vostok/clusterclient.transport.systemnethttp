@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Vostok.Clusterclient.Core.Model;
+using Vostok.Commons.Time;
 using Vostok.Logging.Abstractions;
 
 // ReSharper disable MethodSupportsCancellation
@@ -73,9 +74,14 @@ namespace Vostok.Clusterclient.Transport.SystemNetHttp.Helpers
         }
 
         private void LogRequestTimeout(Request request, TimeSpan timeout)
-            => log.Warn("Request timed out. Target = '{Target}'. Timeout = {Timeout}.", request.Url.Authority, timeout);
+            => log.Warn("Request timed out. Target = '{Target}'. Timeout = {Timeout}.", new
+            {
+                Target = request.Url.Authority,
+                Timeout = timeout.ToPrettyString(),
+                TimeoutMs = timeout.TotalMilliseconds
+            });
 
         private void LogFailedToWaitForRequestAbort()
-            => log.Warn("Timed out request was aborted but did not complete in {RequestAbortTimeout}.", abortWaitTimeout);
+            => log.Warn("Timed out request was aborted but did not complete in {RequestAbortTimeout}.", abortWaitTimeout.ToPrettyString());
     }
 }
